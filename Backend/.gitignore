@@ -1,0 +1,6 @@
+node_modules/
+.env
+config/
+data.json
+a.json
+test.js
