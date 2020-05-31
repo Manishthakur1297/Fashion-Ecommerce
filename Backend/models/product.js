@@ -165,16 +165,16 @@ const productSchema = new mongoose.Schema(
         },
         price_positioning_text: {
             type: String
+        },
+        created_at: {
+            type: Date
+        },
+        updated_at: {
+            type: Date
         }
-        // created_at: {
-        //     type: Date
-        // },
-        // updated_at: {
-        //     type: Date
-        // }
-    },
-    { timestamps : true }
-    ,{ _id: false }
+    }
+    // { timestamps : true },
+    // { _id: false }
 )
 
 module.exports = Product = mongoose.model('product', productSchema)
