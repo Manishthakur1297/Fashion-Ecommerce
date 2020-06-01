@@ -8,16 +8,14 @@ const productSchema = new mongoose.Schema(
         // },
         name: {
             type: String,
-            trim: true,
-            required: true,
+            trim: true
         },
         sku: {
             type: String,
             trim: true
         },
         url: {
-            type: String,
-            required:true
+            type: String
         },
         brand: {
             name: {
@@ -167,10 +165,12 @@ const productSchema = new mongoose.Schema(
             type: String
         },
         created_at: {
-            type: Date
+            type: Date,
+            default: Date.now
         },
         updated_at: {
-            type: Date
+            type: Date,
+            default: Date.now
         }
     }
     // { timestamps : true },

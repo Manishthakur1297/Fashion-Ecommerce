@@ -1,12 +1,8 @@
 import React from "react";
 import "../style.css";
 
-const Layout = ({
-    title = "Title",
-    description = "Description",
-    className,
-    children
-}) => (
+const Layout = ({ title = "Title", description = "Description", className, children }) => 
+(
     <div>
         <div className="jumbotron">
             <h2>{title}</h2>

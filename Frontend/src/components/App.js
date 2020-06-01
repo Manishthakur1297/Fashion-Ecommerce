@@ -1,60 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
-import { getProducts, getFilteredProducts } from './apiCore';
+import { getFilteredProducts } from './apiCore';
 import Card from './Card';
 import StockBox from './StockBox';
 import BrandBox from './BrandBox';
+import DiscountBox from './DiscountBox';
+import DateBox from './DateBox';
 
 const App = () => {
-    const [productsByArrival, setProductsByArrival] = useState([]);
+    //const [productsByArrival, setProductsByArrival] = useState([]);
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
-    
-    //const [brands, setBrands] = useState([]);
 
     const [myFilters, setMyFilters] = useState({
         filters: {
             stock: [],
-            brand: []
-            // discount : { value: null, operator: 'greater_than' } ,
-            // brand : { value: null, operator: 'contains' } ,
-            // stock : { value: null, operator: 'equals' }
-
-            //created_at : { value: [], operator: 'between' }
+            brand: [],
+            created_at: [],
+            discount: []
         }
     })
 
     const [filteredResults, setFilteredResults] = useState([]);
 
-    const loadProductsByArrival = () => {
-        getProducts('created_at').then(data => {
-            console.log(data);
-            if (data.error) {
-                setError(data.error);
-            } else {
-                setProductsByArrival(data);
-                setSize(data.size);
-                //setSkip(toSkip);
-            }
-        });
-    };
+    // const loadProductsByArrival = () => {
+    //     getProducts('created_at').then(data => {
+    //         console.log(data);
+    //         if (data.error) {
+    //             setError(data.error);
+    //         } else {
+    //             setProductsByArrival(data);
+    //             setSize(data.size);
+    //             //setSkip(toSkip);
+    //         }
+    //     });
+    // };
 
 
     const loadFilteredResults = newFilters => {
-        // console.log(newFilters);
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
-                //console.log(data)
                 setFilteredResults(data.products);
                 setSize(data.size);
                 setSkip(0);
+                setLimit(6)
             }
         });
     };
+
 
     useEffect(() => {
         //loadProductsByArrival();
@@ -64,10 +61,10 @@ const App = () => {
 
     const loadMore = () => {
         let toSkip = skip + limit;
-        // console.log(newFilters);
         getFilteredProducts(toSkip, limit, myFilters.filters).then(data => {
             if (data.error) {
                 setError(data.error);
+                console.log(error)
             } else {
                 setFilteredResults([...filteredResults, ...data.products]);
                 setSize(data.size);
@@ -87,22 +84,7 @@ const App = () => {
         );
     };
 
-    const inputChanged = event => {
-        let newFilters = { ...myFilters };
-
-        if(event.target.name==="operator"){
-            newFilters.filters[event.target.id].operator = event.target.value
-        }
-        else{
-            newFilters.filters[event.target.name].value = event.target.value
-        }
-
-        loadFilteredResults(myFilters.filters);
-        setMyFilters(newFilters)
-    }
-
     const handleFilters = (filters, filterBy) => {
-        // console.log("SHOP", filters, filterBy);
         const newFilters = { ...myFilters };
         newFilters.filters[filterBy] = filters;
         console.log(newFilters)
@@ -120,19 +102,29 @@ const App = () => {
         >
             <div className="row">
                 <div className="col-3">
-                    <h4>Filter 1 by Discount</h4>
-                    <div>
+                    <h4>Filter by Discount(%)</h4>
+
+                    {/* <div>
                         <input name="discount" type="Number" onChange={inputChanged}/>
                         <select id="discount" name="operator" onChange={inputChanged}>
                             <option value="greater_than">Greater</option>
                             <option value="smaller_than">Smaller</option>
                             <option value="equal">Equal</option>
                         </select>
-                        {/* <input type="button" name="discount" /> */}
+                        <input type="button" name="discount" />
+                    </div>
+                    <br /> */}
+
+
+                    <div>
+                        <DiscountBox
+                            handleFilters={filters =>
+                                handleFilters(filters, "discount") }
+                        />
                     </div>
                     <br />
 
-                    <h4>Filter 2 by Brand name</h4>
+                    <h4>Filter by Brand</h4>
 
                     <div>
                         <BrandBox
@@ -142,7 +134,7 @@ const App = () => {
                     </div>
                     <br />
 
-                    <h4>Filter3 by stock</h4>
+                    <h4>Filter by Stock</h4>
                     <div>
                         <ul>
                             <StockBox
@@ -152,12 +144,14 @@ const App = () => {
                         </ul>
                     </div>
 
-                    {/* <h4>Filter4 by Date Range</h4>
+                    <h4>Filter by Date</h4>
                     <div>
-                        <input type="radio" name="date" value="IN" /> IN
-                        <input type="radio" name="date" value="OUT" /> OUT<br />
-
-                    </div> */}
+                        <DateBox
+                            handleFilters={filters =>
+                                handleFilters(filters, "created_at") }
+                        />
+                    </div>
+                    <br />
 
                 </div>
 

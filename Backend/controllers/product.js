@@ -41,6 +41,23 @@ exports.importData = async (req, res) => {
 };
 
 
+exports.create = async (req,res) => {
+    try {
+        
+        let data = req.body
+        console.log(data)
+        let product = new Product(data)
+        const result = await product.save().catch(e => {
+            console.log("ERROR : ",e)
+            process.exit(1)
+        });
+        return res.json(result)
+    } catch (error) {
+        return res.status(400).json("ERROR : ",error.stack)
+    }
+}
+
+
 exports.list = async (req,res) => {
     try {
         let order = req.query.order ? req.query.order : 'asc';
@@ -60,7 +77,7 @@ exports.list = async (req,res) => {
 
 exports.listBySearch = async (req, res) => {
     let order = req.body.order ? req.body.order : "desc";
-    let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    let sortBy = req.body.sortBy ? req.body.sortBy : "created_at";
     let limit = req.body.limit ? parseInt(req.body.limit) : 100;
     let skip = parseInt(req.body.skip);
     let findArgs = {};
@@ -103,15 +120,12 @@ exports.listBySearch = async (req, res) => {
                 }
                 else if (key === "brand") {
                     let regExpr = []
-                    let brandFilter = {}
                     for (let index in req.body.filters[key]) {
                         regExpr.push(new RegExp(req.body.filters[key][index].toLowerCase(), "i"))
                     }
 
-                    brandFilter["$in"] = regExpr
-
                     key = key + ".name"
-                    findArgs[key] = brandFilter
+                    findArgs[key] = regExpr
                     
                 }
                 else if (key === "stock") {
@@ -121,9 +135,11 @@ exports.listBySearch = async (req, res) => {
                     console.log(v)
                 }
                 else if(key === "created_at") {
+                        let date1 = new Date(Date.parse(req.body.filters[key][0][0]+"T00:00:00.000Z"))
+                        let date2 = new Date(Date.parse(req.body.filters[key][0][2]+"T23:59:59.000Z"))
                         findArgs[key] = {
-                            $gte: req.body.filters[key][0],
-                            $lte: req.body.filters[key][1]
+                            $gte: date1,
+                            $lte: date2
                         };
                     }
                 }
@@ -139,7 +155,7 @@ exports.listBySearch = async (req, res) => {
                     size: products.length,
                     products
                 });
-                
+
             } catch (error) {
                 return res.status(400).json({
                     error: "Products not found"
