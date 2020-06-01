@@ -1,3 +1,17 @@
+.brand-delete{
+    margin: 2px;
+    padding: 4px;
+    font-size: 13px;
+    border: 1px dotted blue;
+    background-color: rgb(92, 192, 255);
+    color: white;
+}
+
+.brand-delete-span{
+    margin-left: 5px;
+    color: red;
+}
+
 
 .btn,
 .jumbotron,

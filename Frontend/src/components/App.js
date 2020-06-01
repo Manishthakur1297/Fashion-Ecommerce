@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { getProducts, getFilteredProducts } from './apiCore';
 import Card from './Card';
+import StockBox from './StockBox';
+import BrandBox from './BrandBox';
 
 const App = () => {
     const [productsByArrival, setProductsByArrival] = useState([]);
@@ -9,32 +11,22 @@ const App = () => {
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
+    
+    //const [brands, setBrands] = useState([]);
 
     const [myFilters, setMyFilters] = useState({
-        //filters: {discount:[], brand:"", created_at: [], stock_available: true}
         filters: {
-            discount : { value: null, operator: 'greater_than' } ,
-            brand : { value: null, operator: 'contains' } ,
-            stock : { value: null, operator: 'equals' }
+            stock: [],
+            brand: []
+            // discount : { value: null, operator: 'greater_than' } ,
+            // brand : { value: null, operator: 'contains' } ,
+            // stock : { value: null, operator: 'equals' }
+
             //created_at : { value: [], operator: 'between' }
         }
     })
 
     const [filteredResults, setFilteredResults] = useState([]);
-
-    const inputChanged = event => {
-        let newFilters = { ...myFilters };
-
-        if(event.target.name==="operator"){
-            newFilters.filters[event.target.id].operator = event.target.value
-        }
-        else{
-            newFilters.filters[event.target.name].value = event.target.value
-        }
-
-        loadFilteredResults(myFilters.filters);
-        setMyFilters(newFilters)
-    }
 
     const loadProductsByArrival = () => {
         getProducts('created_at').then(data => {
@@ -95,6 +87,29 @@ const App = () => {
         );
     };
 
+    const inputChanged = event => {
+        let newFilters = { ...myFilters };
+
+        if(event.target.name==="operator"){
+            newFilters.filters[event.target.id].operator = event.target.value
+        }
+        else{
+            newFilters.filters[event.target.name].value = event.target.value
+        }
+
+        loadFilteredResults(myFilters.filters);
+        setMyFilters(newFilters)
+    }
+
+    const handleFilters = (filters, filterBy) => {
+        // console.log("SHOP", filters, filterBy);
+        const newFilters = { ...myFilters };
+        newFilters.filters[filterBy] = filters;
+        console.log(newFilters)
+        loadFilteredResults(myFilters.filters);
+        setMyFilters(newFilters);
+        console.log(newFilters)
+    };
 
     return (
 
@@ -113,21 +128,28 @@ const App = () => {
                             <option value="smaller_than">Smaller</option>
                             <option value="equal">Equal</option>
                         </select>
+                        {/* <input type="button" name="discount" /> */}
                     </div>
                     <br />
 
                     <h4>Filter 2 by Brand name</h4>
-                    <div>
-                        <input name="brand" type="text" onChange={inputChanged}/>
 
+                    <div>
+                        <BrandBox
+                            handleFilters={filters =>
+                                handleFilters(filters, "brand") }
+                        />
                     </div>
                     <br />
 
                     <h4>Filter3 by stock</h4>
                     <div>
-                        <input type="radio" name="stock" value="true" onChange={inputChanged}/> IN
-                        <input type="radio" name="stock" value="false" onChange={inputChanged}/> OUT<br />
-
+                        <ul>
+                            <StockBox
+                                handleFilters={filters =>
+                                    handleFilters(filters, "stock") }
+                            />
+                        </ul>
                     </div>
 
                     {/* <h4>Filter4 by Date Range</h4>
