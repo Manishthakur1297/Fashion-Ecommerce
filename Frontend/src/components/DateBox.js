@@ -8,18 +8,6 @@ const DateBox = ({ handleFilters }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [myDates, setMyDates] = useState([]);
-
-    // const removeBrand = (brand) => (e) => {
-    //     const currentBrandId = myBrands.indexOf(brand);
-    //     let newbrands = [...myBrands]
-
-    //     if (currentBrandId !== -1) {
-    //         newbrands.splice(currentBrandId, 1);
-    //     }
-    //     setMyBrands(newbrands)
-    //     handleFilters(newbrands);
-    // }
-
     
     const addDateFilter = (start,end) => (e) => {
         console.log(start)
@@ -72,10 +60,10 @@ const DateBox = ({ handleFilters }) => {
                 { myDates.map((s,i) => (
                     <label key={i} className="brand-delete" onClick={removeDate(s)}>
                         {s}  <span className="brand-delete-span">X</span> </label> 
-                    )) 
+                    ))
                 }<br />
 
-                <DatePicker
+                Start Date: <DatePicker
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
@@ -83,7 +71,7 @@ const DateBox = ({ handleFilters }) => {
                   endDate={endDate}
                 />
                 
-                <DatePicker
+                End Date : <DatePicker
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd

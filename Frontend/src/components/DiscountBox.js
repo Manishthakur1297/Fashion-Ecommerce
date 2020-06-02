@@ -1,52 +1,65 @@
 import React, { useState } from "react";
 
 const DiscountBox = ({ handleFilters }) => {
-    const [myBrands, setMyBrands] = useState([]);
-    const [brand, setBrand] = useState("");
+    const [myDiscounts, setMyDiscounts] = useState([]);
+    const [discount, setDiscount] = useState(0);
+    const [discountOperator, setDiscountOperator] = useState("greater_than");
 
-    const inputChanged = event => {
-        setBrand(event.target.value)
+    const discountChanged = event => {
+        setDiscount(event.target.value)
     }
 
-    const pushBrand = (brand) => (e) => {
-        const currentBrandId = myBrands.indexOf(brand);
-        let newbrands = [...myBrands]
-
-        if (currentBrandId === -1) {
-            newbrands.push(brand);
-        }
-        setMyBrands(newbrands)
-        handleFilters(newbrands);
-        setBrand("")
+    const operatorChanged = event => {
+        setDiscountOperator(event.target.value)
     }
 
-    const removeBrand = (brand) => (e) => {
-        const currentBrandId = myBrands.indexOf(brand);
-        let newbrands = [...myBrands]
-
-        if (currentBrandId !== -1) {
-            newbrands.splice(currentBrandId, 1);
+    const pushDiscount = (discount, discountOperator) => (e) => {
+        console.log(discount,discountOperator)
+        if(discount===0 || discount===null || discountOperator===null){
+            alert("Please Enter Discount Details Correctly!!!")
         }
-        setMyBrands(newbrands)
-        handleFilters(newbrands);
+        else{
+            const currentDiscountId = myDiscounts.indexOf([discountOperator, discount]);
+            let newDiscounts = [...myDiscounts]
+
+            if (currentDiscountId === -1) {
+                newDiscounts.push([discountOperator,discount]);
+            }
+            setMyDiscounts(newDiscounts)
+            handleFilters(newDiscounts);
+            setDiscount(0)
+            setDiscountOperator("greater_than")
+        }
+    }
+
+    const removeDiscount = (discount) => (e) => {
+        const currentDiscountId = myDiscounts.indexOf(discount);
+        let newDiscounts = [...myDiscounts]
+
+        if (currentDiscountId !== -1) {
+            newDiscounts.splice(currentDiscountId, 1);
+        }
+        setMyDiscounts(newDiscounts)
+        handleFilters(newDiscounts);
     }
 
 
     return(
         <div>
-            { myBrands.map((s,i) => (
-                <label key={i} className="brand-delete" onClick={removeBrand(s)}>
-                     {s}  <span className="brand-delete-span">X</span> </label> 
+            { myDiscounts.map((s,i) => (
+                <label key={i} className="brand-delete" onClick={removeDiscount(s)}>
+                     {s[0]} -  {s[1]}  <span className="brand-delete-span">X</span> </label> 
                 )) 
             }<br />
-            
-            <input
-                onChange={inputChanged}
-                type="text"
-                name="brand"
-                value={brand}
-            />
-            <input type="button" name="brand" value="Add" onClick={pushBrand(brand)}/>
+
+            <input name="discount" type="Number" value={discount} onChange={discountChanged}/>
+            <br />
+            <select id="discount" name="operator" value={discountOperator} onChange={operatorChanged}>
+                <option value="greater_than">Greater</option>
+                <option value="smaller_than">Smaller</option>
+                <option value="equal">Equal</option>
+            </select>
+            <input type="button" name="discount" value="Add" onClick={pushDiscount(discount,discountOperator)}/>
 
         </div>
     )}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const StockBox = ({ handleFilters }) => {
-    const stocks = [{'key': 'IN','value':'true'},{'key': 'OUT','value': 'false'}]
+    const stocks = [{'key': 'IN','value':true},{'key': 'OUT','value': false}]
     const [checked, setCheked] = useState([]);
 
     const handleToggle = c => () => {
@@ -23,7 +23,7 @@ const StockBox = ({ handleFilters }) => {
         <li key={i} className="list-unstyled">
             <input
                 onChange={handleToggle(s.value)}
-                value={checked.indexOf(s === -1)}
+                value={checked.indexOf(s.value === -1)}
                 type="checkbox"
                 className="form-check-input"
             />

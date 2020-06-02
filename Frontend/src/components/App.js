@@ -39,7 +39,7 @@ const App = () => {
     // };
 
 
-    const loadFilteredResults = newFilters => {
+    const loadFilteredResults = (skip,limit,newFilters) => {
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
@@ -68,7 +68,13 @@ const App = () => {
             } else {
                 setFilteredResults([...filteredResults, ...data.products]);
                 setSize(data.size);
-                setSkip(toSkip);
+                if(data.size<limit){
+                    setSkip(0)
+                }
+                else{
+                    setSkip(toSkip);
+                }
+                
             }
         });
     };
@@ -81,6 +87,8 @@ const App = () => {
                     Load more
                 </button>
             )
+            
+           
         );
     };
 
@@ -88,8 +96,10 @@ const App = () => {
         const newFilters = { ...myFilters };
         newFilters.filters[filterBy] = filters;
         console.log(newFilters)
-        loadFilteredResults(myFilters.filters);
+        setSkip(0);
+        setLimit(6)
         setMyFilters(newFilters);
+        loadFilteredResults(skip,limit,myFilters.filters);
         console.log(newFilters)
     };
 
@@ -103,19 +113,6 @@ const App = () => {
             <div className="row">
                 <div className="col-3">
                     <h4>Filter by Discount(%)</h4>
-
-                    {/* <div>
-                        <input name="discount" type="Number" onChange={inputChanged}/>
-                        <select id="discount" name="operator" onChange={inputChanged}>
-                            <option value="greater_than">Greater</option>
-                            <option value="smaller_than">Smaller</option>
-                            <option value="equal">Equal</option>
-                        </select>
-                        <input type="button" name="discount" />
-                    </div>
-                    <br /> */}
-
-
                     <div>
                         <DiscountBox
                             handleFilters={filters =>
@@ -166,7 +163,7 @@ const App = () => {
                         ))}
                     </div>
                     <hr />
-                    {loadMoreButton()}
+                   {loadMoreButton()}
                 </div>
             </div>
         </Layout>
