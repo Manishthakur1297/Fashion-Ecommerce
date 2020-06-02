@@ -109,15 +109,34 @@ exports.listBySearch = async (req, res) => {
         let stockQuery = {"stock" : { '$in': [ true, false] } }
         let orBrandQuery = {"$or" : [ { 'brand.name': { '$regex': '.*', '$options': 'i' } } ]}
         let orDateQuery = {"$or" : [ { "created_at": { '$gte': date1, '$lte': date2 } } ]}
-        let flag = false
+        let andDiscountQuery = {"$and" : [ { "discount": { '$gte': 0 } } ]}
 
         for (let key in req.body.filters) {
 
             if (req.body.filters[key].length>0) {
                 console.log(key)
                 if (key === "discount") {
-
-                    flag = true
+                    let expr = []
+                    for (let index in req.body.filters[key]) {
+                        console.log(req.body.filters[key])
+                        let discountQ = {}
+                        let discount_object = {}
+                        let operator = req.body.filters[key][index][0]
+                        let discount_value = parseFloat(req.body.filters[key][index][1])
+                        if(operator==="greater_than"){
+                            discountQ["$gt"] = discount_value
+                        }else if(operator==="smaller_than"){
+                            discountQ["$lt"] = discount_value
+                        }else{
+                            discountQ["$eq"] = discount_value
+                        }
+                        
+                        discount_object["discount"] = discountQ
+                        //discountQ['created_at'] = dateQ
+                        expr.push(discount_object)
+                    }
+                    andDiscountQuery["$and"] = expr
+                    //matchAndQuery.push(orDateQuery)
 
                 }
                 else if (key === "brand") {
@@ -146,7 +165,7 @@ exports.listBySearch = async (req, res) => {
                         let dateQ = {}
                         let created_at = {}
                         let date1 = new Date(Date.parse(req.body.filters[key][index][0]+"T00:00:00.000Z"))
-                        let date2 = new Date(Date.parse(req.body.filters[key][index][2]+"T23:59:59.000Z"))
+                        let date2 = new Date(Date.parse(req.body.filters[key][index][1]+"T23:59:59.000Z"))
                         dateQ["$gte"] = date1
                         dateQ["$lte"] = date2
                         created_at['created_at'] = dateQ
@@ -162,6 +181,7 @@ exports.listBySearch = async (req, res) => {
             try {
                 console.log(orBrandQuery["$or"])
                 console.log(orDateQuery["$or"])
+                console.log(andDiscountQuery["$and"])
                 console.log(stockQuery["stock"])
                 let products = await Product.aggregate([
                     {$project : { name:1, price:1, media:1, brand:1, 
@@ -175,7 +195,7 @@ exports.listBySearch = async (req, res) => {
                                 {"$or": orBrandQuery["$or"] },
                                 { "stock.available" : stockQuery["stock"] },
                                 {"$or": orDateQuery["$or"] },
-                                //{"$or": orDiscountQuery["$or"] },
+                                {"$and": andDiscountQuery["$and"] }
                             //     { "discount" : { "$eq" : 30 } }
                                 
                             ]

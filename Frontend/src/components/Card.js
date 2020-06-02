@@ -30,7 +30,9 @@ const Card = ({ product }) => {
       <div className="card-body">
         <ShowImage item={product} />
         <p className="card-p  mt-2">{product.description_text.substring(0, 100)} </p>
-        <p className="card-p black-10">$ {product.price.offer_price.value}</p>
+        <p className="card-p black-10">Offer Price : $ {product.price.offer_price.value}</p>
+        <p className="card-p black-10">Regular Price : $ {product.price.regular_price.value}</p>
+        <p className="card-p black-10">Discount : {product.discount}%</p>
         <p className="black-9">Brand: {product.brand.name}</p>
         <p className="black-8">Added on {moment(product.created_at).fromNow()}</p>
         {showStock(product.stock.available)}

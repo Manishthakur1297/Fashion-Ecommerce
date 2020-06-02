@@ -28,7 +28,7 @@ const DateBox = ({ handleFilters }) => {
                 let newdates = [...myDates]
 
                 if (currentDateId === -1) {
-                    newdates.push([start," | ",end])
+                    newdates.push([start,end])
                 }
                 
                 setMyDates(newdates)
@@ -59,7 +59,7 @@ const DateBox = ({ handleFilters }) => {
             <div>
                 { myDates.map((s,i) => (
                     <label key={i} className="brand-delete" onClick={removeDate(s)}>
-                        {s}  <span className="brand-delete-span">X</span> </label> 
+                        {s[0]} |  {s[1]}  <span className="brand-delete-span">X</span> </label> 
                     ))
                 }<br />
 
