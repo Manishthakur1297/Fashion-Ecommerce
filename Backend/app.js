@@ -18,9 +18,8 @@ connectDB();
 app.use(morgan('dev'));
 app.use(express.json({ extended: false }))
 
-// Define Routes
+// Define Product Routes
 app.use('/api', productRoutes );
-
 
 const PORT = process.env.PORT || 8000;
 

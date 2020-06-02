@@ -1,3 +1,16 @@
+/**************TEMPORARY FILE***********************
+
+This is just the backup file that was created to fetch
+queries from database using Find() method of Mongodb which
+perform: 
+FILETR BY DATE      ---- DONE
+FILTER BY BRAND     ---- DONE
+FILTER BY STOCK     ---- DONE
+FILTER BY DISCOUNT  ---- NOT DONE
+
+
+*************************************************************/
+
 const ndjson = require('ndjson')
 const fs = require('fs')
 var json2mongo = require('json2mongo');

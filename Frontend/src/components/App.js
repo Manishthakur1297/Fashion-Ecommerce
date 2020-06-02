@@ -8,11 +8,12 @@ import DiscountBox from './DiscountBox';
 import DateBox from './DateBox';
 
 const App = () => {
-    //const [productsByArrival, setProductsByArrival] = useState([]);
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
+
+    const [filteredResults, setFilteredResults] = useState([]);
 
     const [myFilters, setMyFilters] = useState({
         filters: {
@@ -23,23 +24,7 @@ const App = () => {
         }
     })
 
-    const [filteredResults, setFilteredResults] = useState([]);
-
-    // const loadProductsByArrival = () => {
-    //     getProducts('created_at').then(data => {
-    //         console.log(data);
-    //         if (data.error) {
-    //             setError(data.error);
-    //         } else {
-    //             setProductsByArrival(data);
-    //             setSize(data.size);
-    //             //setSkip(toSkip);
-    //         }
-    //     });
-    // };
-
-
-    const loadFilteredResults = (skip,limit,newFilters) => {
+    const loadFilteredResults = (skip, limit, newFilters) => {
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
@@ -54,7 +39,7 @@ const App = () => {
 
 
     useEffect(() => {
-        //loadProductsByArrival();
+        
         loadFilteredResults(skip, limit, myFilters.filters);
     }, []);
 
@@ -73,8 +58,7 @@ const App = () => {
                 }
                 else{
                     setSkip(toSkip);
-                }
-                
+                } 
             }
         });
     };
@@ -95,12 +79,10 @@ const App = () => {
     const handleFilters = (filters, filterBy) => {
         const newFilters = { ...myFilters };
         newFilters.filters[filterBy] = filters;
-        console.log(newFilters)
         setSkip(0);
         setLimit(6)
         setMyFilters(newFilters);
         loadFilteredResults(skip,limit,myFilters.filters);
-        console.log(newFilters)
     };
 
     return (
@@ -111,7 +93,7 @@ const App = () => {
             className="container-fluid"
         >
             <div className="row">
-                <div className="col-3">
+                <div className="col-2">
                     <h4>Filter by Discount(%)</h4>
                     <div>
                         <DiscountBox
@@ -153,8 +135,8 @@ const App = () => {
                 </div>
 
 
-                <div className="col-9">
-                    <h2 className="mb-4">Products</h2>
+                <div className="col-10">
+                    {/* <h2 className="mb-4">Products</h2> */}
                     <div className="row">
                         {filteredResults.map((product, i) => (
                             <div key={i} className="col-4 mb-3">

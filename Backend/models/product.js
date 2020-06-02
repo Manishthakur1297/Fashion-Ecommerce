@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.Schema
 
 const productSchema = new mongoose.Schema(
     {
-        // _id: {
-        //     type: Number
-        // },
         name: {
             type: String,
             trim: true
@@ -27,17 +23,7 @@ const productSchema = new mongoose.Schema(
         },
         media: {
             standard: { 
-                type : Array 
-                // , 
-                // items : {
-                //     order : {
-                //         type: Number,
-                    
-                //     },
-                //     url: {
-                //         type: String
-                //     }
-                // }
+                type : Array
             },
             thumbnail: { 
                 type : Array , 
@@ -173,8 +159,7 @@ const productSchema = new mongoose.Schema(
             default: Date.now
         }
     }
-    // { timestamps : true },
-    // { _id: false }
+    // ,{ timestamps : true }
 )
 
 module.exports = Product = mongoose.model('product', productSchema)

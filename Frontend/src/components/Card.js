@@ -3,43 +3,63 @@ import moment from 'moment';
 
 const Card = ({ product }) => {
 
+    const ShowImage = ({ item }) => (
+        <div className="product-img">
+            <img
+                src={`${item.media.standard[0].url}`}
+                alt={item.name}
+                // className="mb-3"
+                style={{ width: "250px", height: "320px" }}
+            />
+        </div>
+    );
+    
+    
+    const showStock = stock => {
+        return stock ? (
+          <span class="badge badge-pill badge-primary">In Stock </span>
+        ) : (
+          <span class="badge badge-pill badge-danger">Out of Stock </span>
+        );
+    };
 
-	const ShowImage = ({ item }) => (
-    <div className="product-img">
-        <img
-            src={`${product.media.standard[0].url}`}
-            alt={item.name}
-            className="mb-3"
-            style={{ maxHeight: "100%", width: "100%" }}
-        />
-    </div>
-);
+    const roundToTwo = num => {    
+        return +(Math.round(num + "e+2")  + "e-2");
+    }
 
 
-	const showStock = stock => {
-	    return stock ? (
-	      <span className="badge badge-primary badge-pill">In Stock </span>
-	    ) : (
-	      <span className="badge badge-danger badge-pill">Out of Stock </span>
-	    );
-  };
 
-	return (
-    <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
-      <div className="card-body">
-        <ShowImage item={product} />
-        <p className="card-p  mt-2">{product.description_text.substring(0, 100)} </p>
-        <p className="card-p black-10">Offer Price : $ {product.price.offer_price.value}</p>
-        <p className="card-p black-10">Regular Price : $ {product.price.regular_price.value}</p>
-        <p className="card-p black-10">Discount : {product.discount}%</p>
-        <p className="black-9">Brand: {product.brand.name}</p>
-        <p className="black-8">Added on {moment(product.created_at).fromNow()}</p>
-        {showStock(product.stock.available)}
-        <br />
+  return (
+      <div class="cards-grid">
+         <div class="card">
+            <ShowImage item={product} />  
+            <div class="card__body">
+                <h4 class="card__head">{product.name}</h4>
+                <hr />
+                <div className="flex_space_between">
+                    <div className="card__title">
+                    <span class="badge badge-pill badge-dark">{product.brand.name.substring(0, 28)}</span>
+                    </div>  
+                    <div className="price">
+                        <div id="old">${product.price.regular_price.value}</div>
+                        <div id="new">${product.price.offer_price.value}</div>
+                    </div>
+                </div>
+                <hr />
+                {/* <p className="card__content">{product.description_text.substring(0, 100)} </p> */}
+                <div className="flex_space_between">
+                <div className="card__title">
+                    {showStock(product.stock.available)}
+                    </div>
+                    <p className="card__content">{moment(product.created_at).fromNow()}</p>
+                </div>
+                
+                <div id="clac">{roundToTwo(product.discount)}% OFF</div>
+                <br />
+            </div>
+         </div>
       </div>
-    </div>
   );
-};
+}
 
 export default Card;
