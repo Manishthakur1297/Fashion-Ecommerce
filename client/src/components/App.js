@@ -7,6 +7,8 @@ import BrandBox from './BrandBox';
 import DiscountBox from './DiscountBox';
 import DateBox from './DateBox';
 
+import './App.css';
+
 const App = () => {
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
@@ -93,7 +95,7 @@ const App = () => {
             className="container-fluid"
         >
         <div className="row">
-            <div className="col-2">
+            <div className="col-3">
                 <h4>Filter by Discount(%)</h4>
                     <div>
                         <DiscountBox
@@ -135,7 +137,7 @@ const App = () => {
                 </div>
 
 
-                <div className="col-10">
+                <div className="col-9">
                     {/* <h2 className="mb-4">Products</h2> */}
                     <div className="row">
                         {filteredResults.map((product, i) => (
