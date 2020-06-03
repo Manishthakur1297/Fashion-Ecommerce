@@ -1,0 +1,167 @@
+.brand-delete{
+    margin: 2px;
+    padding: 4px;
+    font-size: 13px;
+    border: 1px dotted blue;
+    background-color: rgb(92, 192, 255);
+    color: white;
+}
+
+.brand-delete-span{
+    margin-left: 5px;
+    color: red;
+}
+
+
+.jumbotron {
+    border-radius: 0px;
+}
+
+
+
+/* =================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Muli&display=swap");
+:root {
+   --ff-head: "Merriweather", serif;
+   --ff-body: "Muli", sans-serif;
+   --fs-body: 1.8rem;
+   --fs-h2: 4rem;
+   --fs-h4: 2.4rem;
+   --fs-h5: 1.8rem;
+   --clr-head: hsla(208, 11%, 15%, 1);
+   --clr-body: hsla(208, 9%, 31%, 0.8);
+   --clr-accent: hsla(216, 97%, 61%, 1);
+
+   box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;
+}
+html,
+body {
+   width: 100%;
+   min-height: 100vh;
+   font-size: 62.5%;
+}
+body {
+   font-family: var(--ff-body);
+   font-size: var(--fs-body);
+   color: var(--clr-body);
+   line-height: 1.8;
+   font-weight: normal;
+}
+
+/* img {
+   max-width: 100%;
+   height: auto;
+} */
+.main {
+   padding: 1em 0;
+}
+.container {
+   max-width: 1200px;
+   width: 90%;
+   margin: 0 auto;
+}
+
+/*====== cards style ==========*/
+
+.cards-grid {
+    padding: 1em 0;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+   grid-gap: 4em 2rem;
+   margin: 15px;
+}
+
+.card {
+    width: 300px;
+    border-radius: 6px;
+    box-shadow: 0 20px 40px 0 rgba(173, 181, 189, 0.1);
+    border: solid 1px rgba(129, 147, 174, 0.12);
+    background-color: #fff;
+    padding: 2.5em;
+    text-align: left;
+    position: relative;
+}
+
+.card:first-child::before {
+   content: "";
+   position: absolute;
+   background-color: #5ed291;
+   top: -8px;
+   left: -1px;
+   width: calc(100% + 2px);
+   height: 8px;
+   border-radius: 6px 6px 0 0;
+}
+
+.card__body {
+   padding-top: 1em;
+}
+
+.card__head {
+   text-align: left;
+   font-size: 16px;
+   color: var(--clr-head);
+   height: 45px;
+}
+
+.card__content {
+    opacity: 0.7;
+    font-size: 1.2em;
+}
+
+.card__description {
+   opacity: 0.8;
+   font-size: 1.1em;
+   text-align: justify;
+}
+
+.card__title{
+    color: red;
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+.flex_space_between{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.price {
+    font-weight: 500;
+    font-size: 1.5em;
+    line-height: 30px;
+    letter-spacing: 1px;
+  }
+  .price #old {
+    margin-right: 5px;
+    opacity: 0.5;
+    font-size: 0.85em;
+    display:inline-block;
+    text-decoration:line-through;
+  }
+  .price #new {display:inline-block;}
+
+  #clac{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+    width:auto;
+    padding:10px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #ec182db0;
+    color: #ffffff;
+    font-size: 1.3em;
+    border: 4px solid #ffffff;
+  }

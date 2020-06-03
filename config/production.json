@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://mj:mj@ecommerce-vpz9e.mongodb.net/test?retryWrites=true&w=majority"
+}
