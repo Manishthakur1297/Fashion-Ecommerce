@@ -13,9 +13,7 @@
 }
 
 
-.btn,
-.jumbotron,
-.nav :hover {
+.jumbotron {
     border-radius: 0px;
 }
 
@@ -58,10 +56,10 @@ body {
    font-weight: normal;
 }
 
-img {
+/* img {
    max-width: 100%;
    height: auto;
-}
+} */
 .main {
    padding: 1em 0;
 }
@@ -103,28 +101,6 @@ img {
    border-radius: 6px 6px 0 0;
 }
 
-/* .card:nth-child(2)::before {
-   content: "";
-   position: absolute;
-   background-color: #63a2ff;
-   top: -8px;
-   left: -1px;
-   width: calc(100% + 2px);
-   height: 8px;
-   border-radius: 6px 6px 0 0;
-}
-
-.card:last-child::before {
-   content: "";
-   position: absolute;
-   background-color: #ffd25f;
-   top: -8px;
-   left: -1px;
-   width: calc(100% + 2px);
-   height: 8px;
-   border-radius: 6px 6px 0 0;
-} */
-
 .card__body {
    padding-top: 1em;
 }
@@ -137,8 +113,14 @@ img {
 }
 
 .card__content {
-   --fs-body: 1.6rem;
-   font-size: var(--fs-body);
+    opacity: 0.7;
+    font-size: 1.2em;
+}
+
+.card__description {
+   opacity: 0.8;
+   font-size: 1.1em;
+   text-align: justify;
 }
 
 .card__title{

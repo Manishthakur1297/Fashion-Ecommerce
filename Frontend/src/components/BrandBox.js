@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
 
 const BrandBox = ({ handleFilters }) => {
     const [myBrands, setMyBrands] = useState([]);
@@ -36,20 +37,23 @@ const BrandBox = ({ handleFilters }) => {
         <div>
             
                 { myBrands.map((s,i) => (
-                <label key={i} className="brand-delete" onClick={removeBrand(s)}>
+                <label key={i} className="badge-pill badge-info" onClick={removeBrand(s)}>
                      {s}  <span className="brand-delete-span">X</span> </label> 
                 )) 
             }<br />
-            
-            <input
-                onChange={inputChanged}
-                type="text"
-                name="brand"
-                value={brand}
-            />
-            <input type="button" name="brand" value="Add" onClick={pushBrand(brand)}/>
 
-            
+            <InputGroup className="mb-3">
+                <FormControl
+                placeholder="Brand Name"
+                aria-label="brand"
+                aria-describedby="basic-addon2"
+                value={brand}
+                onChange={inputChanged}
+                />
+                <InputGroup.Append>
+                <Button variant="outline-secondary" onClick={pushBrand(brand)}>Search</Button>
+                </InputGroup.Append>
+            </InputGroup>           
     </div>
     )}
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Form } from 'react-bootstrap';
 
 const StockBox = ({ handleFilters }) => {
-    const stocks = [{'key': 'IN','value':true},{'key': 'OUT','value': false}]
+    const stocks = [{'key': 'Available','value':true},{'key': 'Not Available','value': false}]
     const [checked, setCheked] = useState([]);
 
     const handleToggle = c => () => {
@@ -18,18 +19,22 @@ const StockBox = ({ handleFilters }) => {
         handleFilters(newCheckedStockId);
     };
 
-    return stocks.map((s,i) => (
-        //console.log(s,i)
-        <li key={i} className="list-unstyled">
-            <input
-                onChange={handleToggle(s.value)}
-                value={checked.indexOf(s.value === -1)}
-                type="checkbox"
-                className="form-check-input"
-            />
-            <label className="form-check-label">{s.key}</label>
-        </li>
-    ));
-};
+    return (
+    <Form>
+    <div key="inline-checkbox" className="mb-3">
+        <div className="flex_space_between">
+            { stocks.map((s,i) => (
+               <div key={i}>
+                    <Form.Check
+                    inline label={s.key} type="checkbox" 
+                    id={i} 
+                    onChange={handleToggle(s.value)}
+                    value={checked.indexOf(s.value === -1)}/>
+                </div>     
+    )) }
+        </div>
+        </div>
+    </Form>
+    )};
 
 export default StockBox;

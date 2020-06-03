@@ -88,13 +88,13 @@ const App = () => {
     return (
 
         <Layout
-            title="Filter Page"
+            title="Search Products By Filters"
             description="Search and find Products of your choice"
             className="container-fluid"
         >
-            <div className="row">
-                <div className="col-2">
-                    <h4>Filter by Discount(%)</h4>
+        <div className="row">
+            <div className="col-2">
+                <h4>Filter by Discount(%)</h4>
                     <div>
                         <DiscountBox
                             handleFilters={filters =>
@@ -103,8 +103,7 @@ const App = () => {
                     </div>
                     <br />
 
-                    <h4>Filter by Brand</h4>
-
+                <h4>Filter by Brand</h4>
                     <div>
                         <BrandBox
                             handleFilters={filters =>
@@ -113,7 +112,7 @@ const App = () => {
                     </div>
                     <br />
 
-                    <h4>Filter by Stock</h4>
+                <h4>Filter by Stock</h4>
                     <div>
                         <ul>
                             <StockBox
@@ -122,8 +121,9 @@ const App = () => {
                             />
                         </ul>
                     </div>
+                    <br />
 
-                    <h4>Filter by Date</h4>
+                <h4>Filter by Date</h4>
                     <div>
                         <DateBox
                             handleFilters={filters =>

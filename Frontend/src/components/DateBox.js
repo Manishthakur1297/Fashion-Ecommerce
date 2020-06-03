@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import moment from 'moment';
  
 import "react-datepicker/dist/react-datepicker.css";
+import { Button } from "react-bootstrap";
 
 const DateBox = ({ handleFilters }) => {
     const [startDate, setStartDate] = useState(null);
@@ -10,8 +11,6 @@ const DateBox = ({ handleFilters }) => {
     const [myDates, setMyDates] = useState([]);
     
     const addDateFilter = (start,end) => (e) => {
-        console.log(start)
-        console.log(end)
         if(start===null || end===null){
             alert('Please Select Date Range First!!')
         }
@@ -58,30 +57,47 @@ const DateBox = ({ handleFilters }) => {
     return (
             <div>
                 { myDates.map((s,i) => (
-                    <label key={i} className="brand-delete" onClick={removeDate(s)}>
+                    <label key={i} className="badge-pill badge-info" onClick={removeDate(s)}>
                         {s[0]} |  {s[1]}  <span className="brand-delete-span">X</span> </label> 
                     ))
                 }<br />
-
-                Start Date: <DatePicker
-                  selected={startDate}
-                  onChange={date => setStartDate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
-                />
-                
-                End Date : <DatePicker
-                  selected={endDate}
-                  onChange={date => setEndDate(date)}
-                  selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={startDate}
-                />
+                <div className="row">
+                    <div className="col-3">
+                        <label>Start</label>
+                    </div>
+                    <div className="col-9">
+                        <DatePicker
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        />
+                    </div>
+                </div>
                 <br />
-                <button onClick={addDateFilter(startDate,endDate)}>Add Date</button>
-                <button onClick={clearDateFilter}>Clear Date</button>
+
+                
+                <div className="row">
+                    <div className="col-3">
+                        <label>End</label>
+                    </div>
+                    <div className="col-9">
+                        <DatePicker
+                        selected={endDate}
+                        onChange={date => setEndDate(date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                        />
+                    </div>
+                </div>
+                <br />
+                <div className="flex_space_between">
+                    <Button variant="info" onClick={addDateFilter(startDate,endDate)}>Add Date</Button>
+                    <Button variant="secondary" onClick={clearDateFilter}>Clear Date</Button>
+                </div>
             </div>
         )
     }
