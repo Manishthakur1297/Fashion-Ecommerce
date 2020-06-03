@@ -13,12 +13,18 @@ const BrandBox = ({ handleFilters }) => {
         const currentBrandId = myBrands.indexOf(brand);
         let newbrands = [...myBrands]
 
-        if (currentBrandId === -1) {
-            newbrands.push(brand);
+        if(brand.length===0){
+            alert("Brand Name can't be empty!!!")
         }
-        setMyBrands(newbrands)
-        handleFilters(newbrands);
-        setBrand("")
+        else{
+            if (currentBrandId === -1) {
+                newbrands.push(brand);
+            }
+            setMyBrands(newbrands)
+            handleFilters(newbrands);
+            setBrand("")
+        }
+       
     }
 
     const removeBrand = (brand) => (e) => {
