@@ -15,17 +15,20 @@
 } */
 
 /*====== cards style ==========*/
+html{
+   font-size: 62.5%;
+}
 
 .cards-grid {
     padding: 1em 0;
    display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-   grid-gap: 4em 2rem;
-   margin: 15px;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   grid-gap: 3em 2rem;
+   margin: 10px;
 }
 
 .card {
-    width: 300px;
+    width: 290px;
     border-radius: 6px;
     box-shadow: 0 20px 40px 0 rgba(173, 181, 189, 0.1);
     border: solid 1px rgba(129, 147, 174, 0.12);

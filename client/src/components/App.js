@@ -95,8 +95,8 @@ const App = () => {
             className="container-fluid"
         >
         <div className="row">
-            <div className="col-3">
-                <h4>Filter by Discount(%)</h4>
+            <div className="col-2">
+                <h5>Filter by Discount(%)</h5>
                     <div>
                         <DiscountBox
                             handleFilters={filters =>
