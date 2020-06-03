@@ -1,4 +1,4 @@
-
+/* 
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Muli&display=swap");
 :root {
    --ff-head: "Merriweather", serif;
@@ -12,40 +12,7 @@
    --clr-accent: hsla(216, 97%, 61%, 1);
 
    box-sizing: border-box;
-}
-*,
-*::before,
-*::after {
-   margin: 0;
-   padding: 0;
-   box-sizing: inherit;
-}
-html,
-body {
-   width: 100%;
-   min-height: 100vh;
-   font-size: 62.5%;
-}
-body {
-   font-family: var(--ff-body);
-   font-size: var(--fs-body);
-   color: var(--clr-body);
-   line-height: 1.8;
-   font-weight: normal;
-}
-
-/* img {
-   max-width: 100%;
-   height: auto;
 } */
-.main {
-   padding: 1em 0;
-}
-.container {
-   max-width: 1200px;
-   width: 90%;
-   margin: 0 auto;
-}
 
 /*====== cards style ==========*/
 
@@ -157,9 +124,4 @@ body {
 .brand-delete-span{
    margin-left: 5px;
    color: red;
-}
-
-
-.jumbotron {
-   border-radius: 0px;
 }
