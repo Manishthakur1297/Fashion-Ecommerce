@@ -96,7 +96,7 @@ const App = () => {
         >
         <div className="row">
             <div className="col-2">
-                <h5>Filter by Discount(%)</h5>
+                <h4>Filter by Discount(%)</h4>
                     <div>
                         <DiscountBox
                             handleFilters={filters =>
