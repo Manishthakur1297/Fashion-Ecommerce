@@ -137,7 +137,7 @@ const App = () => {
                 </div>
 
 
-                <div className="col-9">
+                <div className="col-10">
                     {/* <h2 className="mb-4">Products</h2> */}
                     <div className="row">
                         {filteredResults.map((product, i) => (
