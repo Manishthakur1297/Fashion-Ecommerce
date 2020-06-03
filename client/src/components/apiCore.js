@@ -1,5 +1,5 @@
 export const getProducts = sortBy => {
-    return fetch(`/products?sortBy=${sortBy}&order=desc&limit=12`, {
+    return fetch(`/api/products?sortBy=${sortBy}&order=desc&limit=12`, {
         method: "GET"
     })
         .then(response => {
@@ -15,7 +15,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
         skip,
         filters
     };
-    return fetch(`/products/by/search`, {
+    return fetch(`/api/products/by/search`, {
         method: "POST",
         headers: {
             Accept: "application/json",
