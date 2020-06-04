@@ -135,13 +135,16 @@ const App = () => {
                     <br />
 
                 </div>
+                
+                <div className="col-1">
 
-
-                <div className="col-10">
+                </div>
+                
+                <div className="col-9">
                     {/* <h2 className="mb-4">Products</h2> */}
-                    <div className="row">
+                    <div className="row flex_space_between">
                         {filteredResults.map((product, i) => (
-                            <div key={i} className="col-4 mb-3">
+                            <div key={i}>
                                 <Card product={product} />
                             </div>
                         ))}

@@ -34,11 +34,13 @@ html{
 }
 
 .cards-grid {
-    padding: 1em 0;
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-   grid-gap: 4em 2rem;
+   padding: 1em 0;
+   display: inline-block;
+   /* grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); */
+   /* grid-gap: 4em 2rem; */
    margin: 10px;
+   box-sizing: border-box;
+   margin-right: 5px;
 }
 
 .card {
