@@ -84,7 +84,7 @@ const App = () => {
         setSkip(0);
         setLimit(6)
         setMyFilters(newFilters);
-        loadFilteredResults(skip,limit,myFilters.filters);
+        loadFilteredResults(0,limit,myFilters.filters);
     };
 
     return (
