@@ -104,6 +104,7 @@ const App = () => {
                         />
                     </div>
                     <br />
+                    <hr />
 
                 <h4>Filter by Brand</h4>
                     <div>
@@ -113,8 +114,9 @@ const App = () => {
                         />
                     </div>
                     <br />
-
+                    <hr />
                 <h4>Filter by Stock</h4>
+                <br />
                     <div>
                         <ul>
                             <StockBox
@@ -124,6 +126,7 @@ const App = () => {
                         </ul>
                     </div>
                     <br />
+                    <hr />
 
                 <h4>Filter by Date</h4>
                     <div>
@@ -133,14 +136,14 @@ const App = () => {
                         />
                     </div>
                     <br />
-
+                    <hr />
                 </div>
                 
-                <div className="col-1">
+                {/* <div className="col-1">
 
-                </div>
+                </div> */}
                 
-                <div className="col-9">
+                <div className="col-10">
                     {/* <h2 className="mb-4">Products</h2> */}
                     <div className="row flex_space_between">
                         {filteredResults.map((product, i) => (

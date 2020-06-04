@@ -22,7 +22,7 @@ const StockBox = ({ handleFilters }) => {
     return (
     <Form>
     <div key="inline-checkbox" className="mb-3">
-        <div className="flex_space_between">
+        <div>
             { stocks.map((s,i) => (
                <div key={i}>
                     <Form.Check

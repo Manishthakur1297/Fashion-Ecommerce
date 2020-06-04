@@ -95,9 +95,13 @@ html{
 
 .flex_space_between{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
+.flex_space{
+   display: flex;
+   justify-content: space-between;
+}
 
 .price {
     font-weight: 500;

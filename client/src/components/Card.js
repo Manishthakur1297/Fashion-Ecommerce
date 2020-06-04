@@ -19,7 +19,7 @@ const Card = ({ product }) => {
             <div className="card__body">
                 <h4 className="card__head">{product.name}</h4>
                 <hr />
-                <div className="flex_space_between">
+                <div className="flex_space">
                     <div className="card__title">
                     <span className="badge badge-pill badge-dark">{product.brand.name.substring(0, 25)}</span>
                     </div>  
@@ -31,7 +31,7 @@ const Card = ({ product }) => {
                 <hr />
                 <p className="card__description">{product.description_text.substring(0, 80)}... </p>
                 <hr />
-                <div className="flex_space_between">
+                <div className="flex_space">
                   <div className="card__title">
                     {showStock(product.stock.available)}
                   </div>

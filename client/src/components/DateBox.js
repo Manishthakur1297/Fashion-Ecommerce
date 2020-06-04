@@ -62,10 +62,10 @@ const DateBox = ({ handleFilters }) => {
                     ))
                 }<br />
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                         <label>Start</label>
                     </div>
-                    <div className="col-9">
+                    <div className="col-10">
                         <DatePicker
                         selected={startDate}
                         onChange={date => setStartDate(date)}
@@ -79,10 +79,10 @@ const DateBox = ({ handleFilters }) => {
 
                 
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                         <label>End</label>
                     </div>
-                    <div className="col-9">
+                    <div className="col-10">
                         <DatePicker
                         selected={endDate}
                         onChange={date => setEndDate(date)}
