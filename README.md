@@ -1,7 +1,5 @@
 # Fashion-Ecommerce
 
-HEROKU URL(Live DEMO) : https://fashion-ecommerce.herokuapp.com/
-
 ## Run Server(Express.js)
 npm run server
 
