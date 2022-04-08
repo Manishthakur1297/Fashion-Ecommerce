@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-// const dotenv = require('dotenv');
-// dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config()
 // const config = require('config');
 // const db = config.get('mongoURI');
 
